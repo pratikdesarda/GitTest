@@ -1,0 +1,224 @@
+#include "stdafx.h"
+#include "MyMathDll.h"
+#include "string.h"
+#include <string>
+#include <iostream>
+#include <stdio.h>
+//#define _CRT_SECURE_NO_DEPRECATE
+//#define _CRT_NONSTDC_NO_DEPRECATE
+
+using namespace std;
+
+string exec(char* cmd) 
+{
+    FILE* pipe = _popen(cmd, "r");
+    if (!pipe) return "ERROR";
+    char buffer[128];
+    string result = "";
+    while(!feof(pipe)) 
+    {
+    	if(fgets(buffer, 128, pipe) != NULL)
+    		result += buffer;
+    }
+    _pclose(pipe);
+    return result;
+}
+
+void adbDevicesCommand()
+{
+    string temp;
+    //cout << "\nIn adbDevicesCommand\n";
+	cout << "\n";
+	temp=exec("adb devices");
+    cout << temp;
+}
+void infoDevicesCommand(char str[12])
+{
+	char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+	cout << "\nDevice Information\n";
+	cout << "\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.product.manufacturer");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Manufacturer : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.product.model");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Model : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.build.version.release");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "OS Version : " << temp2;
+	cout <<"\n";
+}
+
+void cpuInfoCommand(char str[12])
+{
+	char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+    cout << "\nCPU Information\n\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell cat /proc/cpuinfo");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << temp2;
+	cout << "\n";
+}
+
+void memoryInfoCommand(char str[12])
+{
+    char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+    cout << "\nCPU Information\n\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell cat /proc/meminfo");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << temp2;
+	cout << "\n";
+}
+
+void batteryInfoCommand(char str[12])
+{
+    char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell dumpsys battery");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+    cout << "\nBattery Information\n\n";
+	temp2=exec(temp);
+    cout << temp2;
+	cout << "\n";
+}
+
+void wifiInfoCommand(char str[12])
+{
+	char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+	cout << "\nWiFi Information\n";
+	cout << "\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop wifi.interface");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Wifi Interface : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop wlan.driver.status");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "WiFi Status : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop net.tcp.buffersize.wifi");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "WiFi Buffersize : " << temp2;
+	cout <<"\n";
+}
+
+void bluetoothInfoCommand(char str[12])
+{
+	char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+	cout << "\nBluetooth Information\n";
+	cout << "\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop init.svc.bluetoothd");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Bluetooth Status : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.product.bluetooth");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Bluetooth Version : " << temp2;
+	cout <<"\n";
+}
+
+void cameraInfoCommand(char str[12])
+{
+	char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+	cout << "\nCamera Information\n";
+	cout << "\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.product.main_camera");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Primary Camera (Main Camera) : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.product.front_camera");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Secondory Camera (Front Camera) : " << temp2;
+	cout <<"\n";
+}
+
+void displayInfoCommand(char str[12])
+{
+	char temp[100] = "";
+	char temp1[60] = "";
+	std::string temp2;
+	std::string temp3;
+	cout << "\nDisplay Information\n";
+	cout << "\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.build.display.id");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Display ID : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop ro.product.display_resolution");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	cout << "Display Resolution : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop persist.sys.NV_DISPXRES");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp2=exec(temp);
+	//cout << "Screen Resolution : " << temp2;
+	//cout <<"\n";
+	strcpy_s(temp,"adb -s ");
+	strcpy_s(temp1," shell getprop persist.sys.NV_DISPYRES");
+	strcat_s(temp,str);
+	strcat_s(temp,temp1);
+	temp3=exec(temp);
+	cout << "Screen Resolution : ";
+	cout << "\nWidth = " << temp2;
+	cout << "Height = " << temp3;
+	//cout <<"\n";
+}

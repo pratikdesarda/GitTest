@@ -1,0 +1,21 @@
+#ifdef MYMATHDLL_EXPORTS
+#define MYMATHDLL_API __declspec(dllexport)
+#else
+#define MYMATHDLL_API __declspec(dllimport)
+#endif
+ 
+//#define PI 3.1415
+ 
+MYMATHDLL_API void adbDevicesCommand();
+MYMATHDLL_API void infoDevicesCommand(char[]);
+MYMATHDLL_API void cpuInfoCommand(char[]);
+MYMATHDLL_API void memoryInfoCommand(char[]);
+MYMATHDLL_API void batteryInfoCommand(char[]);
+MYMATHDLL_API void wifiInfoCommand(char[]);
+MYMATHDLL_API void bluetoothInfoCommand(char[]);
+MYMATHDLL_API void cameraInfoCommand(char[]);
+MYMATHDLL_API void displayInfoCommand(char[]);
+/*MYMATHDLL_API double PowerOf3 (double UserNumber);
+MYMATHDLL_API double CircleArea (double UserRadius);
+MYMATHDLL_API double CircleCircum (double UserRadius);
+MYMATHDLL_API int getDevices();*/

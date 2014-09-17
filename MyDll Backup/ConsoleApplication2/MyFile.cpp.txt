@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include<iostream>
+#include "MyMathDll.h"
+ 
+int main ( )
+{
+	int ch;
+	char a[20];
+	do
+	{
+		printf("\n-----Menu-----\n");
+		printf("\n1. Device List");
+		printf("\n2. Device Information");
+		printf("\n3. CPU Information");
+		printf("\n4. Memory Information");
+		printf("\n5. Battery Information");
+		printf("\n6. WiFi Information");
+		printf("\n7. Bluetooth Information");
+		printf("\n8. Camera Information");
+		printf("\n9. Display Information");
+		printf("\n10. Exit\n");
+		printf("\nSelect Your Choice : ");
+		scanf("%d",&ch);
+		switch (ch)
+		{
+		case 1 : 
+			adbDevicesCommand();
+			break;
+		case 2 :
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			infoDevicesCommand(a);
+			break;
+		case 3 :
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			cpuInfoCommand(a);
+			break;
+		case 4:
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			memoryInfoCommand(a);
+			break;
+		case 5:
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			batteryInfoCommand(a);
+			break;
+		case 6:
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			wifiInfoCommand(a);
+			break;
+		case 7 :
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			bluetoothInfoCommand(a);
+			break;
+		case 8:
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			cameraInfoCommand(a);
+			break;
+		case 9 :
+			printf("Enter serial number : ");
+			scanf("%s",&a);
+			displayInfoCommand(a);
+			break;
+		case 10 : 
+			exit(1);
+		default :
+			printf("\nEnter Proper Choice...");
+			break;
+		}
+	} while (ch !=10);
+	return 0;
+}
